@@ -34,10 +34,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test --watch",
+    "test": "react-scripts test",
     "commit": "git cz",
     "build": "react-scripts build",
-    "eject": "react-scripts eject",
     "prepare": "husky install"
   },
   "eslintConfig": {
