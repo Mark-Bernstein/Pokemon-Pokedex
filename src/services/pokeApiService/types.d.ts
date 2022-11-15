@@ -74,6 +74,77 @@ interface PokemonStat {
   base_stat: number;
 }
 
+interface PokemonSpeciesDexEntry {
+  entry_number: number;
+  pokedex: NamedApiResource;
+}
+
+interface EvolutionDetail {
+  item: NamedApiResource;
+  trigger: NamedApiResource;
+  gender: number;
+  held_item: NamedApiResource;
+  known_move: NamedApiResource;
+  known_move_type: NamedApiResource;
+  location: NamedApiResource;
+  min_level: number;
+  min_happiness: number;
+  min_beauty: number;
+  min_affection: number;
+  needs_overworld_rain: boolean;
+  party_species: NamedApiResource;
+  party_type: NamedApiResource;
+  relative_physical_stats: number;
+  time_of_day: string;
+  trade_species: NamedApiResource;
+  turn_upside_down: boolean;
+}
+
+interface ChainLink {
+  is_baby: boolean;
+  species: NamedApiResource;
+  evolution_details: EvolutionDetail[];
+  evolves_to: ChainLink[];
+}
+
+interface EvolutionChain {
+  id: number;
+  baby_trigger_item: NamedApiResource;
+  chain: Chain;
+}
+
+interface Name {
+  name: string;
+  language: NamedApiResource;
+}
+
+interface PalParkEncounterArea {
+  base_score: number;
+  rate: number;
+  area: NamedApiResource;
+}
+
+interface FlavorText {
+  flavor_text: string;
+  language: NamedApiResource;
+  version: NamedApiResource;
+}
+
+interface Description {
+  description: string;
+  language: NamedApiResource;
+}
+
+interface Genus {
+  genus: string;
+  language: NamedApiResource;
+}
+
+interface PokemonSpeciesVariety {
+  is_default: boolean;
+  pokemon: NamedApiResource;
+}
+
 export interface GetPokemonResponse {
   id: number;
   name: string;
@@ -93,4 +164,34 @@ export interface GetPokemonResponse {
   species: NamedApiResource;
   stats: PokemonStat[];
   types: PokemonType[];
+}
+
+export interface GetPokemonSpeciesResponse {
+  id: number;
+  name: string;
+  order: number;
+  gender_rate: number;
+  capture_rate: number;
+  base_happiness: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  hatch_counter: number;
+  has_gender_differences: boolean;
+  forms_switchable: boolean;
+  growth_rate: NamedApiResource;
+  pokedex_numbers: PokemonSpeciesDexEntry[];
+  egg_groups: NamedApiResource[];
+  color: NamedApiResource;
+  shape: NamedApiResource;
+  evolves_from_species: NamedApiResource;
+  evolution_chain: EvolutionChain;
+  habitat: NamedApiResource;
+  generation: NamedApiResource;
+  names: Name[];
+  pal_park_encounters: PalParkEncounterArea[];
+  flavor_text_entries: FlavorText[];
+  form_descriptions: Description[];
+  genera: Genus[];
+  varieties: PokemonSpeciesVariety[];
 }
