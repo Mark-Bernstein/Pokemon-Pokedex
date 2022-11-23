@@ -41,7 +41,7 @@ describe("Filtering pokemon...", () => {
   it("filters words out that do not start with 'char'", () => {
     render(<App />);
 
-    const input = screen.getByLabelText<HTMLInputElement>("search");
+    const input = screen.getByLabelText<HTMLInputElement>("Which Pokémon are you looking for?");
     expect(input).toBeInTheDocument();
 
     fireEvent.change(input, { target: { value: "char" } });
