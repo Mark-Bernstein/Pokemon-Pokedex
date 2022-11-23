@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../App";
 
 describe("Viewing a list of pokemon.", () => {
@@ -34,5 +34,22 @@ describe("Viewing a list of pokemon.", () => {
 
     const squirtle = screen.getByText(/squirtle/i);
     expect(squirtle).toBeInTheDocument();
+  });
+});
+
+describe("Filtering pokemon...", () => {
+  it("filters words out that do not start with 'char'", () => {
+    render(<App />);
+
+    const input = screen.getByLabelText<HTMLInputElement>("search");
+    expect(input).toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: "char" } });
+
+    const squirtle = screen.queryByText(/squirtle/i);
+    expect(squirtle).not.toBeInTheDocument();
+
+    const chars = screen.getAllByText(/char/i);
+    expect(chars.length).toBe(3);
   });
 });

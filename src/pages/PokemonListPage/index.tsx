@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PokemonList from "../../components/PokemonList";
+import { NavBar } from "../../components/NavBar";
 
 const PokemonListPage = () => {
-  const [pokemon] = useState<{ name: string; url: string }[]>([
+  const [pokemonList] = useState<{ name: string; url: string }[]>([
     {
       name: "bulbasaur",
       url: "https://pokeapi.co/api/v2/pokemon/1/",
@@ -25,7 +26,14 @@ const PokemonListPage = () => {
     },
   ]);
 
-  return <PokemonList listOfPokemon={pokemon} />;
+  const [searchValue, setSearchValue] = useState("");
+
+  return (
+    <div>
+      <NavBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <PokemonList listOfPokemon={pokemonList} searchValue={searchValue} />
+    </div>
+  );
 };
 
 export default PokemonListPage;

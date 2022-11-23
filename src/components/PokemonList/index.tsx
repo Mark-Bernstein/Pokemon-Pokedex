@@ -2,11 +2,13 @@ import React from "react";
 import { PokemonListProps } from "./types";
 
 const PokemonList = (props: PokemonListProps) => {
-  const { listOfPokemon } = props;
-  console.log("LOOK: ", props);
+  const { listOfPokemon, searchValue } = props;
 
-  const Pokemon = listOfPokemon.map((pokemon) => {
-    console.log("LOOK: ", pokemon);
+  const filteredPokemonList = listOfPokemon.filter(
+    (pokemon) => pokemon.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
+  );
+
+  const Pokemon = filteredPokemonList.map((pokemon) => {
     return (
       <div key={pokemon.url}>
         <p>{pokemon.name}</p>
