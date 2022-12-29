@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { PokemonListProps } from "./types";
-import { getAllPokemon } from "../../services/pokeApiService";
+// import { getAllPokemon } from "../../services/pokeApiService";
 import axios from "axios";
+import PokemonListItem from "../PokemonListItem";
 
 const PokemonList = (props: PokemonListProps) => {
   const { listOfPokemon, setListOfPokemon, searchValue } = props;
@@ -22,11 +23,7 @@ const PokemonList = (props: PokemonListProps) => {
   );
 
   const Pokemon = filteredPokemonList.map((pokemon) => {
-    return (
-      <div key={pokemon.url}>
-        <p>{pokemon.name}</p>
-      </div>
-    );
+    return <PokemonListItem key={pokemon.url} name={pokemon.name} url={pokemon.url} />;
   });
 
   return <div>{Pokemon}</div>;

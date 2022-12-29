@@ -10,7 +10,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.11.60",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
@@ -23,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/jest": "^29.2.4",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
