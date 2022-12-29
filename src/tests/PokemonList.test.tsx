@@ -79,7 +79,7 @@ describe("Viewing a list of pokemon", () => {
 });
 
 describe("Filtering pokemon...", () => {
-  it("filters words out that do not start with 'char'", () => {
+  it("filters words out that do not start with 'char'", async () => {
     render(<App />);
 
     const input = screen.getByLabelText<HTMLInputElement>("Which Pokémon are you looking for?");
@@ -87,7 +87,7 @@ describe("Filtering pokemon...", () => {
 
     fireEvent.change(input, { target: { value: "char" } });
 
-    const squirtle = screen.queryByText(/squirtle/i);
+    const squirtle = await screen.queryByText(/squirtle/i);
     expect(squirtle).not.toBeInTheDocument();
 
     const chars = screen.getAllByText(/char/i);

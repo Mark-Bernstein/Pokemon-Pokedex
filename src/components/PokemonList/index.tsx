@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { PokemonListProps } from "./types";
-// import { getAllPokemon } from "../../services/pokeApiService";
+import { getAllPokemon } from "../../services/pokeApiService";
 import axios from "axios";
 
 const PokemonList = (props: PokemonListProps) => {

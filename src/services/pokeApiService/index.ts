@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// import { ListResponse } from "./types";
+import { ListResponse } from "./types";
 /*
 
 Import ListResponse from the types.d.ts file in the directory. 
