@@ -187,7 +187,7 @@ export interface GetPokemonSpeciesResponse {
   evolves_from_species: NamedApiResource;
   evolution_chain: EvolutionChain;
   habitat: NamedApiResource;
-  generation: NamedApiResource;
+  genera: NamedApiResource;
   names: Name[];
   pal_park_encounters: PalParkEncounterArea[];
   flavor_text_entries: FlavorText[];
