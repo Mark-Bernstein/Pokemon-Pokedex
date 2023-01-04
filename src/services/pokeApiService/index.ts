@@ -23,13 +23,14 @@ export const getAPokemon = (id: string): Promise<AxiosResponse<GetPokemonRespons
 
 export const getAPokemonSpecies = (id: string): Promise<AxiosResponse<GetPokemonSpeciesResponse, undefined>> => {
   return axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
-    console.log("res is: ", res);
+    // console.log("res is: ", res);
 
-    const pokemonListData = res.data;
+    // const pokemonListData = res.data;
 
-    console.log("pokemonListData is: ", pokemonListData);
+    // console.log("pokemonListData is: ", pokemonListData);
 
-    return pokemonListData;
+    // return pokemonListData;
+    return res;
   });
 };
 

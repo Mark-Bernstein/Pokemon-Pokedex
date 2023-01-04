@@ -8,31 +8,46 @@ import { Pokemon } from "../../components/Pokemon";
 const PokemonPage = () => {
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<GetPokemonResponse>();
-  // const [pokemon, setPokemon] = useState({});
-
   const { pokemonId } = useParams();
-  const currentState = useRef();
-
-  if (pokemon !== undefined) {
-    currentState.current = pokemon;
-  }
+  const pokemonRef = useRef(pokemon);
 
   useEffect(() => {
     try {
       if (pokemonId !== undefined) {
         getAPokemon(pokemonId).then(async (response) => {
           const pokemonData = response.data;
-          console.log("getAPokemon response.data is: ", pokemonData);
 
-          // const pokemonSpecies = await getAPokemonSpecies(pokemonId);
-          // console.log("pokemonSpecies DATA is: ", pokemonSpecies);
+          const {
+            data: { genera },
+          } = await getAPokemonSpecies(pokemonId);
+          console.log("pokemonSpecies DATA is: ", genera);
 
-          // console.log("RESPONSE.DATA is: ", response.data);
+          // const species = genera.map((genus) => {
+          //   console.log("GENUS is: ", genus)
+          // })
 
-          // setPokemon({ ...response.data, species: { ...response.data.species, name: response.data.name } });
-          // setPokemon({ ...response.data });
-          setPokemon(pokemonData);
-          console.log("pokemon is: ", pokemon);
+          const asArray = Object.entries(genera);
+
+          const filterSpecies = asArray.filter(([key, value]) => {
+            if (value.language.name === "en") {
+              return value.genus;
+              // console.log("value is: ", value.genus);
+            }
+            // value.language.name === "en";
+          });
+
+          const species = Object.fromEntries(filterSpecies);
+
+          console.log("Filtered is: ", species);
+          const updatedSpeciesName = species.genus;
+
+          setPokemon({ ...response.data, species: { ...genera, name: updatedSpeciesName } });
+          // setPokemon({ ...response.data, species: { ...genera, name: response.data.name } });
+          // setPokemon({ ...response.data, species: species });
+
+          // setPokemon(pokemonData);
+
+          pokemonRef.current = pokemonData;
 
           navigate(`/pokemon/${pokemonId}/${pokemonData.name}`, { replace: true });
         });
@@ -46,7 +61,7 @@ const PokemonPage = () => {
   return (
     <div className="PokemonPage">
       <p>Pokemon Page. Current pokemonId is {pokemonId}</p>
-      <Pokemon pokemon={currentState.current} />
+      <Pokemon pokemon={pokemonRef.current} />
     </div>
   );
 };
