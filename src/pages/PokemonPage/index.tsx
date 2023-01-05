@@ -15,32 +15,36 @@ const PokemonPage = () => {
     const getPokemon = async () => {
       try {
         if (pokemonId !== undefined) {
-          getAPokemon(pokemonId).then(async (response) => {
-            const {
-              data: { genera },
-            } = await getAPokemonSpecies(pokemonId);
+          if (parseInt(pokemonId) % 1 == 0 && parseInt(pokemonId) < 1 && parseInt(pokemonId) < 905) {
+            getAPokemon(pokemonId).then(async (response) => {
+              const {
+                data: { genera },
+              } = await getAPokemonSpecies(pokemonId);
 
-            const asArray = Object.entries(genera);
+              const asArray = Object.entries(genera);
 
-            const filterSpecies = asArray.filter(([key, value]) => {
-              if (value.language.name === "en") {
-                const { genus } = value;
-                return genus;
-              }
+              const filterSpecies = asArray.filter(([key, value]) => {
+                if (value.language.name === "en") {
+                  const { genus } = value;
+                  return genus;
+                }
+              });
+
+              const species = filterSpecies[0][1].genus;
+              const url = filterSpecies[0][1].language.url;
+
+              // const species2 = Object.fromEntries(filterSpecies);
+              // console.log("species 2 is: ", species2);
+
+              setPokemon({ ...response.data, species: { name: species, url: url } });
+
+              pokemonRef.current = pokemon;
+
+              navigate(`/pokemon/${pokemonId}/${response.data.name}`, { replace: true });
             });
-
-            const species = filterSpecies[0][1].genus;
-            const url = filterSpecies[0][1].language.url;
-
-            // const species2 = Object.fromEntries(filterSpecies);
-            // console.log("species 2 is: ", species2);
-
-            setPokemon({ ...response.data, species: { name: species, url: url } });
-
-            pokemonRef.current = pokemon;
-
-            navigate(`/pokemon/${pokemonId}/${response.data.name}`, { replace: true });
-          });
+          } else {
+            navigate("/not-found", { replace: true });
+          }
         }
       } catch (error) {
         console.log("ERROR IS: ", error);
