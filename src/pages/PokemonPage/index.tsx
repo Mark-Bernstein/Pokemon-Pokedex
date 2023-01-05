@@ -15,7 +15,12 @@ const PokemonPage = () => {
     const getPokemon = async () => {
       try {
         if (pokemonId !== undefined) {
-          if (parseInt(pokemonId) % 1 == 0 && parseInt(pokemonId) < 1 && parseInt(pokemonId) < 905) {
+          if (
+            parseInt(pokemonId) % 1 == 0 &&
+            parseInt(pokemonId) > 0 &&
+            parseInt(pokemonId) < 905 &&
+            pokemonId.match("^[0-9]+$")
+          ) {
             getAPokemon(pokemonId).then(async (response) => {
               const {
                 data: { genera },

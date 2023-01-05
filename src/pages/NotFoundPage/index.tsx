@@ -1,7 +1,17 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NotFoundPage = () => {
-  return <div>404: Page Not Found</div>;
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <img id="errorPageImage" src="http://i.stack.imgur.com/SBv4T.gif" alt="slowpoke-error-page" width="100%" />
+      <h1>404</h1>
+      <h2>Slowpoke thinks you got lost...</h2>
+      <button onClick={() => navigate("/")}>HOME</button>
+    </>
+  );
 };
 
 export default NotFoundPage;
