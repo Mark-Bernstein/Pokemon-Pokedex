@@ -12,56 +12,62 @@ const PokemonPage = () => {
   const pokemonRef = useRef(pokemon);
 
   useEffect(() => {
-    try {
-      if (pokemonId !== undefined) {
-        getAPokemon(pokemonId).then(async (response) => {
-          const pokemonData = response.data;
+    const getPokemon = async () => {
+      try {
+        if (pokemonId !== undefined) {
+          getAPokemon(pokemonId).then(async (response) => {
+            const {
+              data: { genera },
+            } = await getAPokemonSpecies(pokemonId);
 
-          const {
-            data: { genera },
-          } = await getAPokemonSpecies(pokemonId);
-          console.log("pokemonSpecies DATA is: ", genera);
+            const asArray = Object.entries(genera);
 
-          // const species = genera.map((genus) => {
-          //   console.log("GENUS is: ", genus)
-          // })
+            const filterSpecies = asArray.filter(([key, value]) => {
+              if (value.language.name === "en") {
+                const { genus } = value;
+                return genus;
+              }
+            });
 
-          const asArray = Object.entries(genera);
+            const species = filterSpecies[0][1].genus;
+            const url = filterSpecies[0][1].language.url;
 
-          const filterSpecies = asArray.filter(([key, value]) => {
-            if (value.language.name === "en") {
-              return value.genus;
-              // console.log("value is: ", value.genus);
-            }
-            // value.language.name === "en";
+            // const species2 = Object.fromEntries(filterSpecies);
+            // console.log("species 2 is: ", species2);
+
+            setPokemon({ ...response.data, species: { name: species, url: url } });
+
+            pokemonRef.current = pokemon;
+
+            navigate(`/pokemon/${pokemonId}/${response.data.name}`, { replace: true });
           });
-
-          const species = Object.fromEntries(filterSpecies);
-
-          console.log("Filtered is: ", species);
-          const updatedSpeciesName = species.genus;
-
-          setPokemon({ ...response.data, species: { ...genera, name: updatedSpeciesName } });
-          // setPokemon({ ...response.data, species: { ...genera, name: response.data.name } });
-          // setPokemon({ ...response.data, species: species });
-
-          // setPokemon(pokemonData);
-
-          pokemonRef.current = pokemonData;
-
-          navigate(`/pokemon/${pokemonId}/${pokemonData.name}`, { replace: true });
-        });
+        }
+      } catch (error) {
+        console.log("ERROR IS: ", error);
+        navigate("/not-found", { replace: true });
       }
-    } catch (error) {
-      console.log("ERROR IS: ", error);
-      navigate("/not-found", { replace: true });
-    }
+    };
+    getPokemon();
   }, []);
+
+  // const nextPokemon = () => {
+  //   if (pokemonId !== undefined) {
+  //     try {
+  //       const nextPokemonID = parseInt(pokemonId) + 1;
+  //       console.log("00000 :", nextPokemonID);
+  //       navigate(`/pokemon/${nextPokemonID}`);
+  //     } catch (error) {
+  //       console.log("ERROR is: ", error);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="PokemonPage">
-      <p>Pokemon Page. Current pokemonId is {pokemonId}</p>
-      <Pokemon pokemon={pokemonRef.current} />
+      <button onClick={() => navigate(`/pokemon/`)}> Go back to Home page</button>
+      <p>Welcome to the Pokemon Page</p>
+      <Pokemon pokemon={pokemon} />
+      {/* <button onClick={() => nextPokemon()}> Next Pokemon</button> */}
     </div>
   );
 };

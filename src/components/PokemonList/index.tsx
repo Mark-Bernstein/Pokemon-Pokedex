@@ -1,21 +1,15 @@
 import React, { useEffect } from "react";
 import { PokemonListProps } from "./types";
-// import { getAllPokemon } from "../../services/pokeApiService";
-import axios from "axios";
 import PokemonListItem from "../PokemonListItem";
+import { getAllPokemon } from "../../services/pokeApiService";
 
 const PokemonList = (props: PokemonListProps) => {
   const { listOfPokemon, setListOfPokemon, searchValue } = props;
 
-  const getAllPokemon = async () => {
-    await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=151&offest=0`).then((response) => {
-      const pokemonListData = response.data.results;
-      setListOfPokemon(pokemonListData);
-    });
-  };
-
   useEffect(() => {
-    getAllPokemon();
+    getAllPokemon().then((response) => {
+      setListOfPokemon(response);
+    });
   }, []);
 
   const filteredPokemonList = listOfPokemon.filter(

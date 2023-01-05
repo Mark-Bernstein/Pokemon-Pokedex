@@ -152,7 +152,7 @@ export interface GetPokemonResponse {
   height: number;
   is_default: boolean;
   order: number;
-  weigth: number;
+  weight: number;
   abilities: PokemonAbility[];
   forms: NamedApiResource[];
   game_indices: VersionGameIndex[];
