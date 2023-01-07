@@ -3,10 +3,6 @@ import { GetPokemonResponse } from "./types";
 import { GetPokemonSpeciesResponse } from "./types";
 import { ListResponse } from "./types";
 
-// export const getAllPokemon = async () => {
-//   await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=151&offest=0`).then((res) => res.data.results);
-// };
-
 export const getAllPokemon = async (): Promise<AxiosResponse<ListResponse, undefined>> => {
   return await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=151&offest=0`).then((res) => res.data.results);
 };

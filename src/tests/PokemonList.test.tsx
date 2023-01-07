@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "../App";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import PokemonListPage from "../pages/PokemonListPage";
 
 jest.mock("axios", () => ({
   create: () => ({
@@ -59,7 +60,17 @@ jest.mock("axios", () => ({
 
 describe("Viewing a list of pokemon", () => {
   it("displays a list of pokemon!", async () => {
-    render(<App />);
+    render(
+      <MemoryRouter initialEntries={["/pokemon"]}>
+        <Routes>
+          <Route path="/" element={<PokemonListPage />} />
+          <Route path="/pokemon" element={<PokemonListPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const charizard = await screen.findByText(/charizard/i);
+    expect(charizard).toBeInTheDocument();
 
     const bulbasaur = await screen.findByText(/bulbasaur/i);
     expect(bulbasaur).toBeInTheDocument();
@@ -70,9 +81,6 @@ describe("Viewing a list of pokemon", () => {
     const charmeleon = await screen.findByText(/charmeleon/i);
     expect(charmeleon).toBeInTheDocument();
 
-    const charizard = await screen.findByText(/charizard/i);
-    expect(charizard).toBeInTheDocument();
-
     const squirtle = await screen.findByText(/squirtle/i);
     expect(squirtle).toBeInTheDocument();
   });
@@ -80,7 +88,14 @@ describe("Viewing a list of pokemon", () => {
 
 describe("Filtering pokemon...", () => {
   it("filters words out that do not start with 'char'", async () => {
-    render(<App />);
+    render(
+      <MemoryRouter initialEntries={["/pokemon"]}>
+        <Routes>
+          <Route path="/" element={<PokemonListPage />} />
+          <Route path="/pokemon" element={<PokemonListPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
 
     const input = screen.getByLabelText<HTMLInputElement>("Which Pokémon are you looking for?");
     expect(input).toBeInTheDocument();
@@ -90,7 +105,7 @@ describe("Filtering pokemon...", () => {
     const squirtle = await screen.queryByText(/squirtle/i);
     expect(squirtle).not.toBeInTheDocument();
 
-    const chars = screen.getAllByText(/char/i);
+    const chars = await screen.getAllByText(/char/i);
     expect(chars.length).toBe(3);
   });
 });

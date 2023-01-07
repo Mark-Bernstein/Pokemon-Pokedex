@@ -206,15 +206,7 @@ jest.mock("axios", () => ({
 
 describe("Viewing a pokemon.", () => {
   test("it displays a pokemon", async () => {
-    // TODO: Fill this in
-  });
-});
-
-/*
-You can render the PokemonPage like this in the test.
-
-
-render(
+    render(
       <MemoryRouter initialEntries={["/pokemon/1"]}>
         <Routes>
           <Route path="/pokemon/:pokemonId" element={<PokemonPage />} />
@@ -222,4 +214,23 @@ render(
         </Routes>
       </MemoryRouter>
     );
-*/
+
+    const bulbasaur = await screen.findByText(/bulbasaur/i);
+    expect(bulbasaur).toBeInTheDocument();
+
+    const grass = await screen.findByText(/grass/i);
+    expect(grass).toBeInTheDocument();
+
+    const poison = await screen.findByText(/poison/i);
+    expect(poison).toBeInTheDocument();
+
+    const seedPokemon = await screen.findByText(/Seed pokémon/i);
+    expect(seedPokemon).toBeInTheDocument();
+
+    const weight = await screen.findByText(/6.9 kg/i);
+    expect(weight).toBeInTheDocument();
+
+    const ability = await screen.findByText(/overgrow/i);
+    expect(ability).toBeInTheDocument();
+  });
+});
