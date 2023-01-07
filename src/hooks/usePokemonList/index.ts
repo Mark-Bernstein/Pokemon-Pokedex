@@ -1,9 +1,10 @@
+import { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { getAllPokemon } from "../../services/pokeApiService";
-import { NamedApiResource } from "../../services/pokeApiService/types";
+import { ListResponse, NamedApiResource } from "../../services/pokeApiService/types";
 
-const usePokemonList = () => {
-  const [pokemonState, setPokemonState] = useState<NamedApiResource[]>([]);
+export const usePokemonList = () => {
+  const [pokemon, setPokemon] = useState<NamedApiResource[] | AxiosResponse<ListResponse, undefined>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -11,12 +12,11 @@ const usePokemonList = () => {
     const getPokemon = async () => {
       try {
         await getAllPokemon().then((response) => {
-          console.log("look:", response);
-          //   setPokemonState(response);
-          // TODO - fix the above line
+          setPokemon(response);
           setIsLoading(false);
         });
       } catch (error) {
+        console.log("ERROR IS: ", error);
         setError(true);
       }
     };
@@ -24,5 +24,5 @@ const usePokemonList = () => {
     getPokemon();
   }, []);
 
-  return { pokemonState, isLoading, error };
+  return { pokemon, isLoading, error };
 };

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAPokemon, getAPokemonSpecies } from "../../services/pokeApiService";
 import { GetPokemonResponse } from "../../services/pokeApiService/types";
 import { Pokemon } from "../../components/Pokemon";
+import StarsSharpIcon from "@mui/icons-material/StarsSharp";
 
 const PokemonPage = () => {
   const navigate = useNavigate();
@@ -73,7 +74,9 @@ const PokemonPage = () => {
 
   return (
     <div className="PokemonPage">
-      <button onClick={() => navigate(`/pokemon/`)}> Go back to Home page</button>
+      <button onClick={() => navigate(`/pokemon/`)}>
+        <StarsSharpIcon style={{ color: "blue" }} />
+      </button>
       <p>Welcome to the Pokemon Page</p>
       <Pokemon pokemon={pokemon} />
       {/* <button onClick={() => nextPokemon()}> Next Pokemon</button> */}

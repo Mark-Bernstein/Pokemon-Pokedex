@@ -2,8 +2,6 @@ import { PokemonProps } from "./types";
 import React from "react";
 
 export const Pokemon = (props: PokemonProps) => {
-  console.log("PROPS ARE: ", props);
-
   const uppercase = (pokemonInfo: string) => {
     if (props.pokemon != undefined) {
       return pokemonInfo[0].toUpperCase() + pokemonInfo.slice(1);
