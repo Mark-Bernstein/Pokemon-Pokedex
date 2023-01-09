@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PokemonListItemProps } from "./types";
-import StarsTwoToneIcon from "@mui/icons-material/StarsTwoTone";
+import StarOutlineTwoToneIcon from "@mui/icons-material/StarOutlineTwoTone";
 
 const PokemonListItem = (props: PokemonListItemProps) => {
+  // const [favoritePokemon, setFavoritePokemon] = useState([]);
   const { name, url } = props;
   const navigate = useNavigate();
 
@@ -15,11 +16,14 @@ const PokemonListItem = (props: PokemonListItemProps) => {
 
   const capitalizedName = capitalizeName(name);
 
-  // const favoritePokemon = () => {};
+  // const starPokemon = () => {
+  //   setFavoritePokemon({...favoritePokemon, })
+  // };
 
   return (
     <div key={url}>
-      <StarsTwoToneIcon style={{ color: "blue" }} />
+      {/* <StarOutlineTwoToneIcon style={{ color: "black" }} onClick={()=> starPokemon()}/> */}
+      <StarOutlineTwoToneIcon style={{ color: "black" }} />
       <button onClick={() => navigate(`/pokemon/${id}`)}>{capitalizedName}</button>
     </div>
   );

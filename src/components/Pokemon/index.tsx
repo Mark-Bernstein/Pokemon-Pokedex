@@ -1,5 +1,6 @@
-import { PokemonProps } from "./types";
 import React from "react";
+import { PokemonProps } from "./types";
+import StarSharpIcon from "@mui/icons-material/StarSharp";
 
 export const Pokemon = (props: PokemonProps) => {
   const uppercase = (pokemonInfo: string) => {
@@ -32,6 +33,8 @@ export const Pokemon = (props: PokemonProps) => {
     <div>
       {props.pokemon != undefined && (
         <div>
+          {/* //TODO check if there should be a star here before rendering the star*/}
+          <StarSharpIcon style={{ color: "blue" }} />
           <img src={props.pokemon.sprites.front_default} alt="Image" />
           <p>Name: {uppercase(props.pokemon.name)}</p>
           <p>Species: {props.pokemon.species.name}</p>

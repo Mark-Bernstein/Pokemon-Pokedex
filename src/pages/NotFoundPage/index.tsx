@@ -6,10 +6,10 @@ const NotFoundPage = () => {
 
   return (
     <>
-      <img id="errorPageImage" src="http://i.stack.imgur.com/SBv4T.gif" alt="slowpoke-error-page" width="100%" />
+      <button onClick={() => navigate("/")}>HOME</button>
       <h1>404</h1>
       <h2>Slowpoke thinks you got lost...</h2>
-      <button onClick={() => navigate("/")}>HOME</button>
+      <img id="errorPageImage" src="http://i.stack.imgur.com/SBv4T.gif" alt="slowpoke-error-page" width="100%" />
     </>
   );
 };

@@ -4,7 +4,7 @@ import { GetPokemonSpeciesResponse } from "./types";
 import { ListResponse } from "./types";
 
 export const getAllPokemon = async (): Promise<AxiosResponse<ListResponse, undefined>> => {
-  return await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=151&offest=0`).then((res) => res.data.results);
+  return await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=905&offest=0`).then((res) => res.data.results);
 };
 
 export const getAPokemon = (id: string): Promise<AxiosResponse<GetPokemonResponse, undefined>> => {

@@ -1,10 +1,9 @@
-import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAPokemon, getAPokemonSpecies } from "../../services/pokeApiService";
 import { GetPokemonResponse } from "../../services/pokeApiService/types";
 import { Pokemon } from "../../components/Pokemon";
-import StarsSharpIcon from "@mui/icons-material/StarsSharp";
+import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
 
 const PokemonPage = () => {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const PokemonPage = () => {
           if (
             parseInt(pokemonId) % 1 == 0 &&
             parseInt(pokemonId) > 0 &&
-            parseInt(pokemonId) < 905 &&
+            parseInt(pokemonId) < 906 &&
             pokemonId.match("^[0-9]+$")
           ) {
             getAPokemon(pokemonId).then(async (response) => {
@@ -39,9 +38,6 @@ const PokemonPage = () => {
               const species = filterSpecies[0][1].genus;
               const url = filterSpecies[0][1].language.url;
 
-              // const species2 = Object.fromEntries(filterSpecies);
-              // console.log("species 2 is: ", species2);
-
               setPokemon({ ...response.data, species: { name: species, url: url } });
 
               pokemonRef.current = pokemon;
@@ -60,26 +56,13 @@ const PokemonPage = () => {
     getPokemon();
   }, []);
 
-  // const nextPokemon = () => {
-  //   if (pokemonId !== undefined) {
-  //     try {
-  //       const nextPokemonID = parseInt(pokemonId) + 1;
-  //       console.log("00000 :", nextPokemonID);
-  //       navigate(`/pokemon/${nextPokemonID}`);
-  //     } catch (error) {
-  //       console.log("ERROR is: ", error);
-  //     }
-  //   }
-  // };
-
   return (
     <div className="PokemonPage">
       <button onClick={() => navigate(`/pokemon/`)}>
-        <StarsSharpIcon style={{ color: "blue" }} />
+        <HomeTwoToneIcon style={{ color: "blue" }} />
       </button>
       <p>Welcome to the Pokemon Page</p>
       <Pokemon pokemon={pokemon} />
-      {/* <button onClick={() => nextPokemon()}> Next Pokemon</button> */}
     </div>
   );
 };
