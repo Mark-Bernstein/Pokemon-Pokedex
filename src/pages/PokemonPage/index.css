@@ -1,0 +1,23 @@
+@keyframes smoothRadialRainbow {
+  0% {
+    background: radial-gradient(circle, red, orange, yellow, green, blue, indigo, violet);
+  }
+  50% {
+    background: radial-gradient(circle, violet, red, orange, yellow, green, blue, indigo);
+  }
+  100% {
+    background: radial-gradient(circle, red, orange, yellow, green, blue, indigo, violet);
+  }
+}
+
+.Pokemon-Page {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  padding: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: smoothRadialRainbow 20s infinite; /* Radial gradient transition */
+  background-size: cover; /* Ensure background covers the element */
+  background-position: center; /* Center the background */
+}

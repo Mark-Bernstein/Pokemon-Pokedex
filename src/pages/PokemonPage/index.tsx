@@ -4,6 +4,7 @@ import { getAPokemon, getAPokemonSpecies } from "../../services/pokeApiService";
 import { GetPokemonResponse } from "../../services/pokeApiService/types";
 import { Pokemon } from "../../components/Pokemon";
 import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
+import "./index.css";
 
 const PokemonPage = () => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const PokemonPage = () => {
   }, []);
 
   return (
-    <div className="PokemonPage">
+    <div className="Pokemon-Page">
       <button onClick={() => navigate(`/pokemon/`)}>
         <HomeTwoToneIcon style={{ color: "blue" }} />
       </button>
