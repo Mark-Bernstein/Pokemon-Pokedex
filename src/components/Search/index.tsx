@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchProps } from "../NavBar/types";
+import "./index.css";
 
 export const Search = (props: SearchProps) => {
   const { searchValue, setSearchValue } = props;
@@ -11,7 +12,7 @@ export const Search = (props: SearchProps) => {
   return (
     <div>
       <label htmlFor="search">Which Pokémon are you looking for? </label>
-      <input id="search" type="text" placeholder="Search..." value={searchValue} onChange={handleChange} />
+      <input className="search" type="text" placeholder="Search..." value={searchValue} onChange={handleChange} />
     </div>
   );
 };

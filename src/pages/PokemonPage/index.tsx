@@ -59,10 +59,12 @@ const PokemonPage = () => {
 
   return (
     <div className="Pokemon-Page">
-      <button onClick={() => navigate(`/pokemon/`)}>
-        <HomeTwoToneIcon style={{ color: "blue" }} />
-      </button>
-      <p>Welcome to the Pokemon Page</p>
+      <div className="home-button-wrapper">
+        <button className="home-button" onClick={() => navigate(`/pokemon/`)}>
+          <HomeTwoToneIcon style={{ fontSize: 40 }} />
+        </button>
+      </div>
+      <p className="page-title">Welcome to the Pokemon Page</p>
       <Pokemon pokemon={pokemon} />
     </div>
   );

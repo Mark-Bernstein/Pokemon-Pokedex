@@ -1,0 +1,14 @@
+.pokemon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 10px;
+}
+
+.pokemon-name-button {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 25px;
+}
