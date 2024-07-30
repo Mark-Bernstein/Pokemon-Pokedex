@@ -5,13 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { PokemonListItemProps } from "./types";
 import StarSharpIcon from "@mui/icons-material/StarSharp";
 
-const StyledStarIcon = styled(StarSharpIcon)<{ isFavorited: boolean }>`
+// Define the custom shouldForwardProp function
+const customShouldForwardProp = (prop: string) => !["isFavorited"].includes(prop);
+
+const StyledStarIcon = styled(StarSharpIcon).withConfig({
+  shouldForwardProp: customShouldForwardProp,
+})<{ isFavorited: boolean }>`
   color: ${(props) => (props.isFavorited ? "blue" : "transparent")};
-  box-shadow: ${(props) => (props.isFavorited ? "0px 0px 10px gold;" : "none")};
+  box-shadow: ${(props) => (props.isFavorited ? "0px 0px 10px gold" : "none")};
   border: 3px solid ${(props) => (props.isFavorited ? "blue" : "transparent")};
-  display: ${(props) => (props.isFavorited ? "" : "none")};
-  background-color: ${(props) => (props.isFavorited ? "white;" : "transparent")};
-  display: flex;
+  display: ${(props) => (props.isFavorited ? "flex" : "none")};
+  background-color: ${(props) => (props.isFavorited ? "white" : "transparent")};
   border-radius: 50%;
   max-height: 50px;
   max-width: 50px;

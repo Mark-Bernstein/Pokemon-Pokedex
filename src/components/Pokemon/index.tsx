@@ -1,36 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./index.css";
 import styled from "styled-components";
 import { PokemonProps } from "./types";
 import StarSharpIcon from "@mui/icons-material/StarSharp";
-import "./index.css";
 
-const StyledStarIcon = styled(StarSharpIcon)<{ isFavorited?: boolean; isClicked?: boolean }>`
-  position: relative;
-  display: flex;
-  box-shadow: 2px 2px 10px white;
-  border: 3px solid ${(props) => (props.isFavorited ? "blue" : "lightgrey")};
-  border-radius: 50%;
-  background: white;
-  margin-bottom: 10px;
-  color: ${(props) => (props.isFavorited ? "blue" : "lightgrey")};
+const customShouldForwardProp = (prop: string) => !["isFavorited", "isClicked"].includes(prop);
+
+const StyledStarIcon = styled(StarSharpIcon).withConfig({
+  shouldForwardProp: customShouldForwardProp,
+})<{ isFavorited?: boolean; isClicked: boolean }>`
+  color: ${(props) => (props.isFavorited ? "blue !important" : "lightgrey !important")};
+  box-shadow: 2px 2px 10px white !important;
+  border: 3px solid ${(props) => (props.isFavorited ? "blue !important" : "lightgrey !important")};
+  border-radius: 50% !important;
+  background: white !important;
   height: 50px !important;
   width: 50px !important;
-  margin-right: 10px;
-  transition: color 1s ease, border-color 1s ease, transform 1s ease;
-  transform: ${(props) => props.isClicked && "rotate(360deg)"} !important;
+  margin-right: 10px !important;
+  transition: color 1s ease, border-color 1s ease, transform 1s ease !important;
+  transform: ${(props) => (props.isClicked ? "rotate(390deg) !important" : "rotate(360deg) !important")};
 
   &:hover {
-    transform: ${(props) => (props.isClicked ? "rotate(390deg)" : "rotate(360deg)")} !important;
+    transform: ${(props) => (props.isClicked ? "rotate(390deg) !important" : "rotate(360deg) !important")};
   }
 `;
-
-export default StyledStarIcon;
 
 export const Pokemon = (props: PokemonProps) => {
   const { pokemon, isFavorited, onFavoriteToggle } = props;
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsClicked(true);
     onFavoriteToggle();
     setTimeout(() => setIsClicked(false), 1000);
@@ -75,7 +75,9 @@ export const Pokemon = (props: PokemonProps) => {
           <div className="pokemon-image-wrapper">
             <img className="pokemon-image" src={pokemon.sprites.front_default} alt="Image" />
           </div>
-          <p className="pokemon-info-title">Name: {uppercase(pokemon.name)}</p>
+          <p className="pokemon-info-title">
+            #{pokemon.order} - {uppercase(pokemon.name)}
+          </p>
           <p className="pokemon-info-title">Species: {pokemon.species.name}</p>
           <p className="pokemon-info-title">Height: {pokemon.height} m</p>
           <p className="pokemon-info-title">Weight: {pokemon.weight} kg</p>
@@ -88,3 +90,5 @@ export const Pokemon = (props: PokemonProps) => {
     </div>
   );
 };
+
+export default Pokemon;
