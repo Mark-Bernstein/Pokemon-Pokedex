@@ -7,14 +7,14 @@ import StarSharpIcon from "@mui/icons-material/StarSharp";
 
 const StyledStarIcon = styled(StarSharpIcon)<{ isFavorited: boolean }>`
   color: ${(props) => (props.isFavorited ? "blue" : "transparent")};
-  display: flex;
   box-shadow: ${(props) => (props.isFavorited ? "0px 0px 10px gold;" : "none")};
   border: 3px solid ${(props) => (props.isFavorited ? "blue" : "transparent")};
+  display: ${(props) => (props.isFavorited ? "" : "none")};
+  background-color: ${(props) => (props.isFavorited ? "white;" : "transparent")};
+  display: flex;
   border-radius: 50%;
   max-height: 50px;
   max-width: 50px;
-  display: ${(props) => (props.isFavorited ? "" : "none")};
-  background-color: ${(props) => (props.isFavorited ? "white;" : "none")};
 `;
 
 const PokemonListItem = (props: PokemonListItemProps) => {
@@ -34,7 +34,7 @@ const PokemonListItem = (props: PokemonListItemProps) => {
 
   return (
     <button className="pokemon-wrapper" key={url} onClick={() => navigate(`/pokemon/${id}`)}>
-      <StyledStarIcon isFavorited={isFavorited} />
+      {isFavorited && <StyledStarIcon isFavorited={isFavorited} />}
       <span className="pokemon-name-span">{capitalizedName}</span>
     </button>
   );
