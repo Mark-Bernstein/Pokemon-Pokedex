@@ -1,6 +1,4 @@
-# Qubit Group Project
-
-This is just a skeleton for starting development
+# Pokedex Project
 
 ## Tools
 
@@ -42,3 +40,5 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+Live website: https://pokemon-pokedex-kappa.vercel.app/
