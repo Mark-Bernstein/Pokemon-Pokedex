@@ -4,8 +4,8 @@
   align-items: center;
 }
 .pokemon-image {
-  width: 150px;
-  height: 150px;
+  width: 400px;
+  height: 400px;
 }
 
 .pokemon-info-title {
@@ -14,7 +14,8 @@
   border-radius: 10px;
   font-size: 20px;
   padding: 5px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 0px 0px 20px 0px;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -22,4 +23,14 @@
   font-size: 16px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   letter-spacing: 1px;
+}
+
+.favorite-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.favorite-text {
+  font-size: 16px;
 }

@@ -7,20 +7,29 @@
 
 .home-button {
   display: flex;
-  width: 60px;
-  height: 60px;
-  background-color: rgb(187, 187, 187);
+  background-color: lightgreen;
   color: black;
-  border: 2px solid white;
+  border: transparent;
   border-radius: 10px;
-  padding: 10px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 20px white;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .home-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(0, 255, 0);
+  color: rgb(38, 0, 255);
+  transform: scale(1.2) rotate(-345deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 1), 0 6px 6px rgba(0, 0, 0, 1);
+  border-radius: 100%;
+}
+
+.home-button:hover::after {
+  transform: scale(1.5);
 }
 
 @keyframes rainbow-animation-page {
@@ -80,9 +89,8 @@
   font-size: 25px;
   text-align: center;
   text-shadow: 2px 2px 10px #ffffff;
-  border-radius: 50px;
+  border-radius: 10px;
   padding: 10px;
-  border: 5px solid black;
   background: linear-gradient(-90deg, #00363a, #0000ff, #000000, #4b0082, #8b00ff, #5200bd, #6b0066);
   background-size: 500% 500%;
   animation: rainbow-animation-page 10s linear infinite;

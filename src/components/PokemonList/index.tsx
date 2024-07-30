@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { PokemonListProps } from "./types";
 import PokemonListItem from "../PokemonListItem";
 import { getAllPokemon } from "../../services/pokeApiService";
+import "./style.css";
 
 const PokemonList = (props: PokemonListProps) => {
   const { listOfPokemon, setListOfPokemon, searchValue } = props;
@@ -20,7 +21,7 @@ const PokemonList = (props: PokemonListProps) => {
     return <PokemonListItem key={pokemon.url} name={pokemon.name} url={pokemon.url} />;
   });
 
-  return <div>{Pokemon}</div>;
+  return <div className="pokemon-list-container">{Pokemon}</div>;
 };
 
 export default PokemonList;

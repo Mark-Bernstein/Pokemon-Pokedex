@@ -9,6 +9,7 @@ import "./index.css";
 const PokemonPage = () => {
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<GetPokemonResponse>();
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
   const { pokemonId } = useParams();
   const pokemonRef = useRef(pokemon);
 
@@ -17,34 +18,31 @@ const PokemonPage = () => {
       try {
         if (pokemonId !== undefined) {
           if (
-            parseInt(pokemonId) % 1 == 0 &&
+            parseInt(pokemonId) % 1 === 0 &&
             parseInt(pokemonId) > 0 &&
             parseInt(pokemonId) < 906 &&
             pokemonId.match("^[0-9]+$")
           ) {
-            getAPokemon(pokemonId).then(async (response) => {
-              const {
-                data: { genera },
-              } = await getAPokemonSpecies(pokemonId);
+            const response = await getAPokemon(pokemonId);
+            const {
+              data: { genera },
+            } = await getAPokemonSpecies(pokemonId);
 
-              const asArray = Object.entries(genera);
+            const asArray = Object.entries(genera);
+            const filterSpecies = asArray.filter(([key, value]) => value.language.name === "en");
+            const species = filterSpecies[0][1].genus;
+            const url = filterSpecies[0][1].language.url;
 
-              const filterSpecies = asArray.filter(([key, value]) => {
-                if (value.language.name === "en") {
-                  const { genus } = value;
-                  return genus;
-                }
-              });
+            setPokemon({ ...response.data, species: { name: species, url: url } });
+            pokemonRef.current = pokemon;
 
-              const species = filterSpecies[0][1].genus;
-              const url = filterSpecies[0][1].language.url;
+            // Check if the current Pokémon is favorited
+            const favorites = JSON.parse(localStorage.getItem("favoritePokemons") || "[]");
+            if (favorites.includes(pokemonId)) {
+              setIsFavorited(true);
+            }
 
-              setPokemon({ ...response.data, species: { name: species, url: url } });
-
-              pokemonRef.current = pokemon;
-
-              navigate(`/pokemon/${pokemonId}/${response.data.name}`, { replace: true });
-            });
+            navigate(`/pokemon/${pokemonId}/${response.data.name}`, { replace: true });
           } else {
             navigate("/not-found", { replace: true });
           }
@@ -55,7 +53,24 @@ const PokemonPage = () => {
       }
     };
     getPokemon();
-  }, []);
+  }, [pokemonId]);
+
+  const toggleFavorite = () => {
+    setIsFavorited((prev) => {
+      const newState = !prev;
+      const favorites = JSON.parse(localStorage.getItem("favoritePokemons") || "[]");
+      if (newState) {
+        favorites.push(pokemonId);
+      } else {
+        const index = favorites.indexOf(pokemonId);
+        if (index > -1) {
+          favorites.splice(index, 1);
+        }
+      }
+      localStorage.setItem("favoritePokemons", JSON.stringify(favorites));
+      return newState;
+    });
+  };
 
   return (
     <div className="Pokemon-Page">
@@ -65,7 +80,7 @@ const PokemonPage = () => {
         </button>
       </div>
       <p className="page-title">Welcome to the Pokemon Page</p>
-      <Pokemon pokemon={pokemon} />
+      {pokemon && <Pokemon pokemon={pokemon} isFavorited={isFavorited} onFavoriteToggle={toggleFavorite} />}
     </div>
   );
 };

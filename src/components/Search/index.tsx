@@ -10,9 +10,11 @@ export const Search = (props: SearchProps) => {
   };
 
   return (
-    <div>
-      <label htmlFor="search">Which Pokémon are you looking for? </label>
-      <input className="search" type="text" placeholder="Search..." value={searchValue} onChange={handleChange} />
+    <div className="search-wrapper">
+      <label className="search-label" htmlFor="search">
+        Which Pokémon are you looking for?{" "}
+      </label>
+      <input className="search-input" type="text" placeholder="Search..." value={searchValue} onChange={handleChange} />
     </div>
   );
 };
