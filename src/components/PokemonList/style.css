@@ -6,6 +6,6 @@
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px rgb(0, 102, 255);
   background: linear-gradient(-45deg, #ff0000, #ff7f00, #00fdd3, #00a500, #0000ff, #00fff2, #4b0082, #8b00ff, #00ff00);
-  background-size: 400% 400%;
-  animation: rainbow-animation-page 5s linear infinite;
+  background-size: 1000% 1000%;
+  animation: rainbow-animation-page 15s linear infinite;
 }
