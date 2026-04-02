@@ -10,6 +10,7 @@
 
 .pokemon-info-title {
   text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  font-family: "Press Start 2P", "Roboto", sans-serif;
   box-shadow: 0px 0px 5px rgb(255, 255, 255);
   border-radius: 10px;
   font-size: 20px;
@@ -20,9 +21,10 @@
 }
 
 .pokemon-info-sub-title {
-  font-size: 16px;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  letter-spacing: 1px;
+  font-size: 24px;
+  font-family: "Press Start 2P", "Roboto", sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
 }
 
 .favorite-wrapper {

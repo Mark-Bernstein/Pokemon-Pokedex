@@ -4,37 +4,27 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(
-    -45deg,
-
-    #ff0000,
-    #ff7f00,
-    #00fdd3,
-    #00a500,
-    #0000ff,
-    #00fff2,
-    #4b0082,
-    #8b00ff,
-    #00ff00
-  );
+  border: 1px solid rgb(0, 0, 0);
+  background: linear-gradient(45deg, #ff0000, #ff7f00, #00fdd3, #00a500, #0000ff, #00fff2, #4b0082, #00ff00);
   background-size: 300% 300%;
   animation: rainbow-animation-page 40s linear infinite;
 }
 
 .pokemon-filter-button {
   width: 350px;
-  background-color: #220000;
-  border: 3px solid #3b3b3b;
-  color: #fbff00;
+  background-color: #fbff00;
+  border: 3px solid #00eeff;
+  color: #0026ff;
   font-weight: bold;
   padding: 12px 20px;
-  font-family: "Press Start 2P", cursive;
+  font-family: "Press Start 2P", "Roboto", sans-serif;
   font-size: 20px;
   cursor: pointer;
   box-shadow: 0 4px #999;
   transition: all 0.2s ease-in-out;
   letter-spacing: 0.5px;
-  border-radius: 50px;
+  border-radius: 25px;
+  box-shadow: 0 2px 10px black;
 }
 
 .pokemon-filter-button:hover {
