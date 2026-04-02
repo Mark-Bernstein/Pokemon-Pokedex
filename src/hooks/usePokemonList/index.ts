@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllPokemon } from "../../services/pokeApiService";
 import { ListResponse, NamedApiResource } from "../../services/pokeApiService/types";
 

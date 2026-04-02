@@ -29,7 +29,7 @@ const PokemonPage = () => {
             } = await getAPokemonSpecies(pokemonId);
 
             const asArray = Object.entries(genera);
-            const filterSpecies = asArray.filter(([key, value]) => value.language.name === "en");
+            const filterSpecies = asArray.filter(([, value]) => value.language.name === "en");
             const species = filterSpecies[0][1].genus;
             const url = filterSpecies[0][1].language.url;
 
